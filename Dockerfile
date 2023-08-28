@@ -5,10 +5,10 @@ FROM php:latest
 WORKDIR /var/www/html
 
 # Copy static site files into the container's web root directory
-COPY ./static-site/ /var/www/html/
+COPY . /var/www/html/
 
 # Expose port 80 to allow incoming HTTP requests
-EXPOSE 80
+EXPOSE 90
 
 # Start the PHP development server when the container starts
-CMD ["php", "-S", "0.0.0.0:80"]
+CMD ["php", "-S", "0.0.0.0:90"]

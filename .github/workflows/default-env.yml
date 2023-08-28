@@ -14,10 +14,10 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Build Docker image
-        run: docker build -t my-php-static-site .
+        run: docker build -t static-site .
 
       - name: Log in to Docker Hub
         run: echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
 
       - name: Push Docker image to Docker Hub
-        run: docker tag my-php-static-site "${{ secrets.DOCKERHUB_USERNAME }}/my-php-static-site:latest" && docker push "${{ secrets.DOCKERHUB_USERNAME }}/my-php-static-site:latest"
+        run: docker tag static-site "${{ secrets.DOCKERHUB_USERNAME }}/static-site:latest" && docker push "${{ secrets.DOCKERHUB_USERNAME }}/static-site:latest"
