@@ -1,0 +1,23 @@
+name: Deploy to Docker Hub
+
+on:
+  push:
+    branches:
+      - main   # Change this to your default branch
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Build Docker image
+        run: docker build -t my-php-static-site .
+
+      - name: Log in to Docker Hub
+        run: echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
+
+      - name: Push Docker image to Docker Hub
+        run: docker tag my-php-static-site "${{ secrets.DOCKERHUB_USERNAME }}/my-php-static-site:latest" && docker push "${{ secrets.DOCKERHUB_USERNAME }}/my-php-static-site:latest"
